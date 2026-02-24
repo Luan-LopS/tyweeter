@@ -1,10 +1,8 @@
-
 import * as S from "./style"
 import { useFormik } from "formik"
 import * as Yup from 'yup'
 import { useLazyGetUserQuery } from "../../services/api"
-import { useEffect } from "react"
-
+import { useState } from "react"
 
 type Props = {
     onSubmitPerfil: (data:{name: string, bio?: string, profile_picture?: File, password: string})  => Promise<void>,
@@ -12,7 +10,10 @@ type Props = {
 }
 
 const Perfil = ({err, onSubmitPerfil}: Props) =>{
-    const [fetchUser, { data: user, isLoading, isError }] = useLazyGetUserQuery()    
+    const [fetchUser, { data: user, isLoading, isError }] = useLazyGetUserQuery()
+    
+    const [isUserFetched, setIsUserFetched] = useState(false)
+
     const form = useFormik({
         initialValues:{
             name:'',
@@ -44,47 +45,81 @@ const Perfil = ({err, onSubmitPerfil}: Props) =>{
         return null
     }
 
-useEffect(() => {
-        fetchUser()
-    }, [fetchUser])
-
-    useEffect(() => {
-        if (user) {
-            form.setValues({
-                name: user.name,
-                bio: user.bio || '',
-                password: '',
-                profile_picture: undefined,
-            })
+    const handleFetchUser = () => {
+        if (!isUserFetched) {
+            fetchUser()
+            setIsUserFetched(true)  
         }
-    }, [user, form]);
+    }
 
-    if(isError)return <p>Tentenovamente</p>
+    if (!isUserFetched && !isLoading && !user) {
+        handleFetchUser()  
+    }
+
+    if (user && !form.values.name) {
+        form.setValues({
+            name: user.name || '',
+            bio: user.bio || '',
+            password: '',
+            profile_picture: undefined,
+        })
+    }
+
+    if(isError) return <p>Tente novamente</p>
     if(isLoading) return <p>Carregando ...</p>
-    if(err)return <p>{err}</p>
+    if(err) return <p>{err}</p>
 
     return(
         <S.ContainerPerfil>
             <S.TitlePerfil>Perfil</S.TitlePerfil>
             <S.ImgPerfil src={user?.profile_picture} alt={user?.name} />
             <S.FormPerfil onSubmit={form.handleSubmit}>
-                <S.InputPerfil id="name" type="text"  name="name" placeholder="name" value={form.values.name} onChange={form.handleChange}/>
+                <S.InputPerfil 
+                    id="name" 
+                    type="text"  
+                    name="name" 
+                    placeholder="name" 
+                    value={form.values.name} 
+                    onChange={form.handleChange}
+                />
                 <small>{getError('name')}</small>
-                <S.InputPerfil id="bio" type="text" name="bio" placeholder="bio" value={form.values.bio} onChange={form.handleChange} />
+
+                <S.InputPerfil 
+                    id="bio" 
+                    type="text" 
+                    name="bio" 
+                    placeholder="bio" 
+                    value={form.values.bio} 
+                    onChange={form.handleChange} 
+                />
                 <small>{getError('bio')}</small>
-                <S.InputPerfil id="profile_picture" type="file" name="profile_picture" placeholder="Imagem"  onChange={(e)=>{
-                    if(e.currentTarget.files && e.currentTarget.files[0]){
-                        form.setFieldValue("profile_picture", e.currentTarget.files[0])}}}/>
-                <S.InputPerfil id="password" type="password" name="password" placeholder="password" value={form.values.password} onChange={form.handleChange}/>
+
+                <S.InputPerfil 
+                    id="profile_picture" 
+                    type="file" 
+                    name="profile_picture" 
+                    placeholder="Imagem"  
+                    onChange={(e)=>{
+                        if(e.currentTarget.files && e.currentTarget.files[0]){
+                            form.setFieldValue("profile_picture", e.currentTarget.files[0])
+                        }
+                    }}
+                />
+
+                <S.InputPerfil 
+                    id="password" 
+                    type="password" 
+                    name="password" 
+                    placeholder="password" 
+                    value={form.values.password} 
+                    onChange={form.handleChange}
+                />
                 <small>{getError('password')}</small>
-                <S.BtnPerfil text="Atualizar" action="submit" width="100%"/>
-            </S.FormPerfil> 
+
+                <S.BtnPerfil text="Atualizar" action="submit" width="100%" />
+            </S.FormPerfil>
         </S.ContainerPerfil>
     )
 }
 
 export default Perfil
-
-
-
-
