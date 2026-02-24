@@ -3,6 +3,7 @@ import * as S from "./style"
 import { useFormik } from "formik"
 import * as Yup from 'yup'
 import { useGetUserQuery } from "../../services/api"
+import { useEffect } from "react"
 
 
 type Props = {
@@ -14,7 +15,6 @@ const Perfil = ({err, onSubmitPerfil}: Props) =>{
     const { data: user, isLoading, isError } = useGetUserQuery()
     
     const form = useFormik({
-        enableReinitialize: true,
         initialValues:{
             name:'',
             bio: '',
@@ -44,6 +44,17 @@ const Perfil = ({err, onSubmitPerfil}: Props) =>{
         }
         return null
     }
+
+    useEffect(()=> {
+        if (user){
+            form.setValues({
+                name: user.name,
+                bio: user.bio || '',
+                password: '', 
+                profile_picture: undefined
+            })
+        }
+    })
 
     if(isError)return <p>Tentenovamente</p>
     if(isLoading) return <p>Carregando ...</p>
