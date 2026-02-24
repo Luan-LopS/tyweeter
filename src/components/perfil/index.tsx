@@ -3,7 +3,6 @@ import * as S from "./style"
 import { useFormik } from "formik"
 import * as Yup from 'yup'
 import { useGetUserQuery } from "../../services/api"
-import { useEffect } from "react"
 
 
 type Props = {
