@@ -54,7 +54,7 @@ const Perfil = ({err, onSubmitPerfil}: Props) =>{
                 profile_picture: undefined
             })
         }
-    },[user])
+    })
 
     if(isError)return <p>Tentenovamente</p>
     if(isLoading) return <p>Carregando ...</p>

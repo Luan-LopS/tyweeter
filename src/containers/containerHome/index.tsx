@@ -133,7 +133,7 @@ const ContainerHome = () =>{
                 <Sidebar/>
             </S.SideMain>
             <S.Main>
-                {showFeed && <Feed tweets={tweets} btnLike={handleLike} btnComment={handleComments} btnDeleteTweet={handleDeletTweet}/>}
+                {showFeed && <Feed tweets={tweets} btnLike={handleLike} btnComment={handleComments} btnDeleteTweet={handleDeletTweet} err={getErrorTweet}/>}
                 {showPerfil && <Perfil onSubmitPerfil={handleSubmitPerfil} err={getErrorPerfil} />}
                 {showUsers && < Explorar not_follow={users} onSubmitFollow={handleSubmitFollow}/>}
                 {showFollow && < Followings relations={relations} onSubmitUnfollow={handleUnfollow} /> }

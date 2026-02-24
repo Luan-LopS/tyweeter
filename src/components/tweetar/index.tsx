@@ -40,8 +40,7 @@ const Tweet  = ({onSubmitTweet,  btnEditar, id}: Props) => {
                 tweet:  tweetData.content
             })
         }
-    },[tweetData])
-
+    })
 
     return(
         <ContentTweetar>

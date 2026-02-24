@@ -11,9 +11,10 @@ type Props ={
     btnLike: (data: {id: number, liked: boolean}) => Promise<void>
     btnComment: (data: {id_tweet: number, content: string}) => Promise<void>
     btnDeleteTweet: (data: {id: number}) => Promise<void>
+    err: string
 }
 
-const Feed =({tweets, btnLike,  btnComment, btnDeleteTweet}: Props)=>{
+const Feed =({tweets, btnLike,  btnComment, btnDeleteTweet, err}: Props)=>{
     const currentUserId = useSelector((state: RootReducer)=> state.auth.currentUserId)
     const [actioncomment, setComment] = useState<number | null>(null)
     const nav = useNavigate() 
@@ -21,6 +22,8 @@ const Feed =({tweets, btnLike,  btnComment, btnDeleteTweet}: Props)=>{
     const handleComments = (tweetId: number) =>{
         setComment(prev => prev === tweetId? null : tweetId)
     } 
+
+    if(err)return <p>err</p>
     
     return(
         <S.Container>  

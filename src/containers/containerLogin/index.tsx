@@ -11,7 +11,7 @@ import { setLogin } from "../../store/slice/loginCadastro"
 
 
 const ContainerLogin = () =>{
-    const [getUsder, {data: user }] =  useLazyGetUserQuery()
+    const [getUsder] =  useLazyGetUserQuery()
     
     const [login] = useLoginMutation();
     const [cadastro] = useCadastroMutation()
