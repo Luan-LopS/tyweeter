@@ -1,7 +1,7 @@
 import * as S from "./style"
 import { useFormik } from "formik"
 import * as Yup from 'yup'
-import { useLazyGetUserQuery } from "../../services/api"
+import { useGetUserQuery, useLazyGetUserQuery } from "../../services/api"
 import { useState } from "react"
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 
 const Perfil = ({err, onSubmitPerfil}: Props) =>{
     const [fetchUser, { data: user, isLoading, isError }] = useLazyGetUserQuery()
-    
+    const {data: profile } = useGetUserQuery()
     const [isUserFetched, setIsUserFetched] = useState(false)
 
     const form = useFormik({
@@ -72,7 +72,7 @@ const Perfil = ({err, onSubmitPerfil}: Props) =>{
     return(
         <S.ContainerPerfil>
             <S.TitlePerfil>Perfil</S.TitlePerfil>
-            <S.ImgPerfil src={user?.profile_picture} alt={user?.name} />
+            <S.ImgPerfil src={profile?.profile_picture} alt={user?.name} />
             <S.FormPerfil onSubmit={form.handleSubmit}>
                 <S.InputPerfil 
                     id="name" 
