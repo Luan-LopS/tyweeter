@@ -35,7 +35,7 @@ const ContainerLogin = () =>{
                 dispatch(setLogin({
                     isLogged:true,
                     userId: Number(me.id),
-                    acess: response.access,
+                    access: response.access,
                     refresh: response.refresh}))
                 nav('/home')
             }  catch (err) {
@@ -67,7 +67,7 @@ const ContainerLogin = () =>{
             dispatch(setLogin({
                 isLogged:true,
                 userId: Number(me.id), 
-                acess: cadastrado.access,
+                access: cadastrado.access,
                 refresh:  cadastrado.refresh
             }))
             nav('/home')
