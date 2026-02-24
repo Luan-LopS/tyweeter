@@ -1,14 +1,11 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import { Comment } from "../models/Tweet";
-import { getAuthHeaders } from "./autHeaders";
+import { baseQueryWithReauthWrapper } from "./autHeaders";
 
 export const commentServices = createApi({
     reducerPath: 'commentServices',
     tagTypes: ['Comments', 'Tweets'],
-    baseQuery: fetchBaseQuery({
-        baseUrl: 'https://luanlops.pythonanywhere.com/api/v1/',
-        prepareHeaders: getAuthHeaders
-    }),
+    baseQuery: baseQueryWithReauthWrapper,
     endpoints: (build) => ({
         getComments: build.query<Comment, void>({
             query: () => 'comments/',

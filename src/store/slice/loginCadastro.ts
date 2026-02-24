@@ -3,21 +3,21 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 type LoginState = {
     IsLogged: boolean
     currentUserId: number
-    acess: string |  null
+    access: string |  null
     refresh: string |  null
 }
 
 type LoginPayload = {
     isLogged: boolean
     userId: number
-    acess: string
+    access: string
     refresh: string
 }
 
 const initialState: LoginState = {
     IsLogged: !!localStorage.getItem("access"),
     currentUserId: 0,
-    acess: localStorage.getItem('access'),
+    access: localStorage.getItem('access'),
     refresh: localStorage.getItem('refresh')
 }
 
@@ -28,20 +28,20 @@ const SliceLoginCadastro = createSlice({
         setLogin: (state, action: PayloadAction<LoginPayload>) => {
             state.IsLogged = action.payload.isLogged
             state.currentUserId = action.payload.userId
-            state.acess = action.payload.acess
+            state.access = action.payload.access
             state.refresh = action.payload.refresh
 
-            localStorage.setItem('access', action.payload.acess)
+            localStorage.setItem('access', action.payload.access)
             localStorage.setItem('refresh', action.payload.refresh)
         },
         refreshToken: (state, action:PayloadAction<string>) => {
-            state.acess  =  action.payload
+            state.access  =  action.payload
             localStorage.setItem('access',  action.payload)
         },
         logout: (state) => {
             state.IsLogged = false;
             state.currentUserId = 0;
-            state.acess = null
+            state.access = null
             state.refresh = null
 
             localStorage.removeItem('access')

@@ -1,14 +1,11 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { getAuthHeaders } from "./autHeaders";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { baseQueryWithReauthWrapper } from "./autHeaders";
 import { Like } from "../models/Like";
 
 export const likeService = createApi({
     reducerPath: 'likeService',
     tagTypes: ['Tweets'],
-    baseQuery:  fetchBaseQuery({
-        baseUrl: 'https://luanlops.pythonanywhere.com/api/v1/',
-        prepareHeaders: getAuthHeaders
-    }),
+    baseQuery:  baseQueryWithReauthWrapper,
     endpoints: (build) =>({
         getLike: build.query<Like[], void>({
             query: ()=>'likes/',

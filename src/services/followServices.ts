@@ -1,13 +1,10 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import { Follow, Relations } from "../models/Follow";
-import { getAuthHeaders } from "./autHeaders";
+import { baseQueryWithReauthWrapper } from "./autHeaders";
 
 export const followService  = createApi({
     reducerPath: 'followService',
-    baseQuery: fetchBaseQuery({
-        baseUrl: 'https://luanlops.pythonanywhere.com/api/v1/',
-        prepareHeaders: getAuthHeaders
-    }),
+    baseQuery: baseQueryWithReauthWrapper,
     tagTypes: ['Follow'],
     endpoints: (build) => ({
         getFollowers: build.query<Follow[], void>({

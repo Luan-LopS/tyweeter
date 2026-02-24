@@ -1,14 +1,11 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi } from '@reduxjs/toolkit/query/react'
 import { Users, ResponseCreateUser} from '../models/User'
-import { getAuthHeaders } from './autHeaders'
+import { baseQueryWithReauthWrapper } from './autHeaders'
 
 
 export const Api = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({
-        baseUrl: 'https://luanlops.pythonanywhere.com/api/v1/',
-        prepareHeaders: getAuthHeaders
-    }),
+    baseQuery: baseQueryWithReauthWrapper,
     tagTypes: ['User'],
     endpoints: (builder) => ({
         getUser: builder.query<ResponseCreateUser,  void>({
