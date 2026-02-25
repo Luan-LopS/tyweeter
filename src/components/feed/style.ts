@@ -53,6 +53,10 @@ export  const ContainerActions  = styled.div`
     justify-content: space-around;
 `
 
+export const trashAnsPencil = styled(ContainerActions)`
+    width: 200px;
+`
+
 export const btnActions = styled.button`
     background: #0f3077;
     color:  #fff;

@@ -36,10 +36,10 @@ const Feed =({tweets, btnLike,  btnComment, btnDeleteTweet, err}: Props)=>{
                             <S.ContentHeader>
                                 <p>{tweet.user.username}</p>
                                 {currentUserId && currentUserId === tweet.user.id && (
-                                    <S.ContainerActions>
+                                    <S.trashAnsPencil>
                                         <S.btnActions onClick={()=>nav(`/home/tweet/${tweet.id}`)}><i className="bi bi-pencil"></i></S.btnActions>
                                         <S.btnActions onClick={()=> btnDeleteTweet({id: tweet.id})}><i className="bi bi-trash"></i></S.btnActions>
-                                    </S.ContainerActions>
+                                    </S.trashAnsPencil>
                                 )}
                             </S.ContentHeader>
                         </header>
