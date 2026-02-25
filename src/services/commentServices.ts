@@ -11,7 +11,8 @@ export const commentServices = createApi({
             query: () => 'comments/',
             transformResponse: (response: any) =>  {
                 return response.results || response
-            }
+            },
+            providesTags: ['Comments', 'Tweets']
         }),
         postComments: build.mutation<Comment, {id_tweet: number, content: string}>({
             query: (body) => ({

@@ -22,7 +22,6 @@ export const followService  = createApi({
                     followers:  response.followers ||  []
                 }
             },
-
             providesTags: ['Follow'],
         }),
         sendFollow: build.mutation<{ followings: boolean}, {user_id: number}>({
@@ -31,7 +30,6 @@ export const followService  = createApi({
             method: 'POST',
             }),
             invalidatesTags: ['Follow']
-
         }),
         unfollow: build.mutation<{ followings: boolean}, {user_id: number}>({
             query: ({ user_id }) => ({

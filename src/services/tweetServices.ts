@@ -11,10 +11,15 @@ export  const tweetService = createApi({
             query:()=> 'tweets/',
             transformResponse: (response: any) => {
                 return response.results || response
-            }
+            },
+            providesTags: ['Tweets']
+
         }),
         getTweetId: build.query<Tweet,  number>({
-            query:(id)  => `tweets/${id}/`
+            query:(id)  => `tweets/${id}/`,
+            providesTags: (result, error, id) => [
+                { type: 'Tweets', id }
+            ]
         }),
         postTweet: build.mutation<Tweet, any>({
             query: (body) =>({
