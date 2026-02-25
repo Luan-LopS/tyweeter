@@ -37,10 +37,10 @@ const Tweet  = ({onSubmitTweet,  btnEditar, id}: Props) => {
     })
 
     const handleTweet = (id: number) => {
-            tweetLazy(id)
+        tweetLazy(id)
     }
 
-    if (isEdit && lazyTweet && id) {
+    if (isEdit && id) {
         handleTweet(id)  
     }
 
