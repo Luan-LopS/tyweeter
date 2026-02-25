@@ -32,20 +32,12 @@ const Tweet  = ({onSubmitTweet,  btnEditar, id}: Props) => {
         onSubmit: async (values)=>{
             if(isEdit){
                 await btnEditar({id: Number(id), content: values.tweet})
-                nav('/home')
             }else{
                 await onSubmitTweet(values)
-                nav('/home')
             }
+            nav('/home')
         }
     })
-
-
-    if(isEdit &&  !form.values.tweet && lazyTweet){
-        form.setValues({
-            tweet: lazyTweet.content
-        })
-    }
 
     return(
         <ContentTweetar>
