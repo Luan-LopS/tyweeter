@@ -50,11 +50,12 @@ export const ContentHeader = styled.div`
 
 export  const ContainerActions  = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 `
 
 export const trashAnsPencil = styled(ContainerActions)`
-    width: 100px;
+    width: 60px;
+    justify-content: space-between;
 `
 
 export const btnActions = styled.button`
