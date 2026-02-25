@@ -54,8 +54,9 @@ export  const ContainerActions  = styled.div`
 `
 
 export const trashAnsPencil = styled(ContainerActions)`
-    width: 60px;
+    width: 40px;
     justify-content: space-between;
+    padding: 5px 0;
 `
 
 export const btnActions = styled.button`
