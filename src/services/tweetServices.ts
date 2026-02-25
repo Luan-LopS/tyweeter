@@ -43,4 +43,4 @@ export  const tweetService = createApi({
     })
 })
 
-export const { useGetTweetsQuery,  useGetTweetIdQuery, usePostTweetMutation, useDeletTweetMutation, useEditTweetMutation } = tweetService
+export const { useGetTweetsQuery,  useGetTweetIdQuery, useLazyGetTweetIdQuery, usePostTweetMutation, useDeletTweetMutation, useEditTweetMutation } = tweetService
