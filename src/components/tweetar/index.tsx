@@ -16,6 +16,7 @@ const Tweet  = ({onSubmitTweet,  btnEditar, id}: Props) => {
     const nav = useNavigate()
     const [tweetLazy,{data: lazyTweet}] = useLazyGetTweetIdQuery()
     const isEdit = Boolean(id)
+    console.log(id)
 
     const form = useFormik({
         initialValues:{
@@ -39,7 +40,7 @@ const Tweet  = ({onSubmitTweet,  btnEditar, id}: Props) => {
             tweetLazy(id)
     }
 
-    if (!isEdit && lazyTweet && id) {
+    if (isEdit && lazyTweet && id) {
         handleTweet(id)  
     }
 
@@ -48,12 +49,13 @@ const Tweet  = ({onSubmitTweet,  btnEditar, id}: Props) => {
             tweet: lazyTweet.content
         })
     }
+    console.log(lazyTweet?.content)
 
     return(
         <ContentTweetar>
             <h2>Qual o Post de Hoje?</h2>
             <FormTwweet onSubmit={form.handleSubmit}>
-                <textarea id="tweet"  placeholder="Tweet" name="tweet" value={form.values.tweet} onChange={form.handleChange}></textarea>
+                <textarea id="tweet"  placeholder="Tweet" name="tweet" value={form.values.tweet} onChange={form.handleChange}/>
                 <Btn text="Tweetar" action="submit" width="100"/>
             </FormTwweet>
         </ContentTweetar>
