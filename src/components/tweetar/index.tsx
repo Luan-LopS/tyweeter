@@ -37,7 +37,8 @@ const Tweet  = ({onSubmitTweet,  btnEditar, id}: Props) => {
     })
 
     const handleTweet = (id: number) => {
-        tweetLazy(id)
+        const a = tweetLazy(id)
+        console.log('retorno do tweet', a)
     }
 
     if (isEdit && id) {
@@ -49,7 +50,6 @@ const Tweet  = ({onSubmitTweet,  btnEditar, id}: Props) => {
             tweet: lazyTweet.content
         })
     }
-    console.log(lazyTweet?.content)
 
     return(
         <ContentTweetar>
